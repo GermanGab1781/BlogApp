@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
 
@@ -34,10 +35,11 @@ const Home = () => {
       {books && 
         <div className='bg-slate-400 flex flex-col w-1/2 m-auto gap-y-2'>
           {books.map((book,index)=>{
+            const location = "book/"+book.id
             return(
-              <div className='bg-blue-700 m-auto' key={index}>
+              <NavLink to={location} className='bg-blue-700 m-auto' key={index}>
                 <span>{book.title}</span>
-              </div>
+              </NavLink>
             )
           })}
           <form className='bg-green-500' onSubmit={handleBookUpload}>
