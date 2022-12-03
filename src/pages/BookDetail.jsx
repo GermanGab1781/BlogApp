@@ -22,8 +22,8 @@ const BookDetail = () => {
       {(book && book.error !== undefined) && <div>NO BOOK WITH THAT ID</div>}
       {(book && book.error === undefined) && 
         <div>
-          {book.id}
-          {book.title}
+          ID:{book.id}<br/>
+          TITLE:{book.title}
         </div>}
 
       
