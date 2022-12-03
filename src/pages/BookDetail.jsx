@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Detail = () => {
+const BookDetail = () => {
   const params = useParams()
   const [book,setBook]= useState(undefined)
 
@@ -31,4 +31,4 @@ const Detail = () => {
   );
 }
 
-export default Detail;
+export default BookDetail;
