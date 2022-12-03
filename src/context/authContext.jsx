@@ -12,7 +12,7 @@ export function AuthContextProvider ({children}){
     setIsAuthenticated(true)
   }
   function logout(){
-    setUserInfo(undefined)
+    setUserInfo({username:undefined, id:undefined,email:undefined})
     setIsAuthenticated(false)
   }
 

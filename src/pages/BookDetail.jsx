@@ -17,7 +17,7 @@ const BookDetail = () => {
   },[setBook,params])
 
   return (
-    <div>
+    <div className='mt-20'>
       {book === undefined && <div>LOADING BOOK...</div>}
       {(book && book.error !== undefined) && <div>NO BOOK WITH THAT ID</div>}
       {(book && book.error === undefined) && 
