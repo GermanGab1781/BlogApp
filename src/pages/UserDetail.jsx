@@ -17,7 +17,7 @@ const UserDetail = () => {
   },[setUser,params])
 
   return (
-    <div className='mt-20'>
+    <div className=''>
       {user === undefined && <div>LOADING USER...</div>}
       {(user && user.error !== undefined) && <div>NO USER WITH THAT ID</div>}
       {(user && user.error === undefined) && 

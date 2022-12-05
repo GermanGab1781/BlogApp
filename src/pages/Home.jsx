@@ -3,7 +3,6 @@ const Home = () => {
   return (
     <div>
       Buenasss
-        
     </div>
   );
 }

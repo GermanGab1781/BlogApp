@@ -7,7 +7,7 @@ const Login = () => {
   const {isLogged,login} = useAuthContext();
 
   useEffect(()=>{
-    //Swal.fire({title:'Attention',icon:'info',text:'This page was made with a free database, so it may take some time to react to petitions'})
+    Swal.fire({title:'Attention',icon:'info',text:'This page was made with a free database, so it may take some time to react to petitions'})
   },[])
   
   console.log(isLogged())
@@ -18,8 +18,13 @@ const Login = () => {
     Swal.fire({title:"Login you in",text:"Please wait",icon:"question"})
     axios.post('https://librarycommerce-node-api.onrender.com/api/users/login',{email,password})
       .then((res)=>{
-        login(res.data.username,res.data.userID,res.data.email)
-        Swal.fire({title:"Login successful",icon:"success",timer:1500,showConfirmButton:false})
+        if (res.data.error === undefined){
+          login(res.data.username,res.data.userID,res.data.email)
+          Swal.fire({title:"Login successful",icon:"success",timer:1500,showConfirmButton:false})
+        }else{
+          Swal.fire({title:"Credentials don't match",icon:"error", text:"Please do try again :)"})
+        }
+        
       })
   }
 
@@ -35,7 +40,7 @@ const Login = () => {
   }
 
   return (
-    <div className='flex flex-col h-screen w-screen bg-green-800'>
+    <div className='flex flex-col h-screen w-screen bg-green-800 -mt-20'>
       <div className='my-auto'>
       <form onSubmit={handleLogin} className='m-auto flex flex-col xl:w-1/4 w-3/4 text-center'>
         <span className='text-3xl font-bond mb-2'>Login</span>

@@ -14,7 +14,7 @@ import BookUpload from "./pages/BookUpload";
 
 function App() {
   return (
-    <div className='mt-20'>
+    <div className='pt-20 bg-slate-700 h-screen w-screen text-white'>
       <AuthContextProvider>
         <BrowserRouter>
           <Navbar/>          

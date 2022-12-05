@@ -21,7 +21,7 @@ export default function UsersCatalog() {
       {users === undefined && <div>LOADING users...</div>}
       {(users && users.length === 0) && <div>No users found</div>}
       {users && 
-        <div className='bg-slate-400 flex flex-col w-1/2 m-auto gap-y-2'>
+        <div className='bg-blue-600 flex flex-col w-1/2 m-auto gap-y-2'>
           {users.map((user,index)=>{
             const location = "/user/"+user.userID
             return(
