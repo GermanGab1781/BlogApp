@@ -2,28 +2,37 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const BookDetail = () => {
+const BlogDetail = () => {
   const params = useParams()
-  const [book,setBook]= useState(undefined)
+  const [blog,setBlog]= useState(undefined)
+  const [blogUser,setBlogUser] = useState(undefined)
 
   useEffect(()=>{
-    const bookId = params.id
-    const endPoint = `https://librarycommerce-node-api.onrender.com/api/books/${bookId}`
+    const blogId = params.id
+    const endPoint = `https://librarycommerce-node-api.onrender.com/api/blogs/${blogId}`
     axios.get(endPoint)
       .then((res)=>{
-        setBook(res.data)
+        setBlog(res.data)
+        console.log(res.data)
+        const endPoint2 = `https://librarycommerce-node-api.onrender.com/api/users/${res.data.userId}`
+        axios.get(endPoint2)
+          .then((resp)=>{
+            setBlogUser(resp.data)
+            console.log(resp.data)
+          })
       })
 
-  },[setBook,params])
+  },[setBlog,setBlogUser,params])
 
   return (
     <div className=''>
-      {book === undefined && <div>LOADING BOOK...</div>}
-      {(book && book.error !== undefined) && <div>NO BOOK WITH THAT ID</div>}
-      {(book && book.error === undefined) && 
+      {(blog === undefined && blogUser === undefined) && <div>LOADING BLOG...</div>}
+      {(blog && blog.error !== undefined)&&(blogUser && blogUser.error !== undefined) && <div>NO BLOG WITH THAT ID</div>}
+      {(blog && blog.error === undefined)&&(blogUser && blogUser.error === undefined) && 
         <div>
-          ID:{book.id}<br/>
-          TITLE:{book.title}
+          ID:{blog.id}<br/>
+          TITLE:{blog.title}<br/>
+          Uploaded by user:"{blogUser.username}"
         </div>}
 
       
@@ -31,4 +40,4 @@ const BookDetail = () => {
   );
 }
 
-export default BookDetail;
+export default BlogDetail;

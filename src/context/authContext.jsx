@@ -1,38 +1,16 @@
-import { createContext,useContext} from "react";
-import useLocalStorage from '../hooks/useLocalStorage'
+import { createContext, useState } from "react";
 
-export const AuthContext = createContext()
+const AuthContext = createContext({});
 
-export function AuthContextProvider ({children}){
-  const [userInfo,setUserInfo]= useLocalStorage("USER_INFO_LIBRARY_APP",[{username:undefined, id:undefined,email:undefined}])
-  const [isAuthenticated,setIsAuthenticated] = useLocalStorage("USER_IS_AUTH_LIBRARY_APP",false)
+export const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState(undefined)
+  const [persist, setPersist] = useState(JSON.parse(localStorage.getItem("persist")) || false)
 
-  function login(username,id,email){
-    setUserInfo({username:username, id:id, email:email})
-    setIsAuthenticated(true)
-  }
-  function logout(){
-    setUserInfo({username:undefined, id:undefined,email:undefined})
-    setIsAuthenticated(false)
-  }
-
-  function isLogged(){
-    return isAuthenticated
-  }
-  function userInformation(){
-    if(isLogged()){
-      return userInfo
-    }
-  }
-
-  return <AuthContext.Provider value={{
-    login,logout,isLogged,userInformation
-  }}>   
-    {children}
-  </AuthContext.Provider>
-
+  return (
+    <AuthContext.Provider value={{ auth, setAuth, persist ,setPersist }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
-export function useAuthContext(){
-  return useContext(AuthContext)
-}
+export default AuthContext
