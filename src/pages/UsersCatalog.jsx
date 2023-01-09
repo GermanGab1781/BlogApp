@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState,useEffect } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { NavLink } from 'react-router-dom'
 
 export default function UsersCatalog() {
   const [users, setUsers] = useState(undefined)
   useEffect(()=>{
-    const endPoint='https://librarycommerce-node-api.onrender.com/api/users/'
+    const endPoint='/api/users'
     axios
       .get(endPoint)
       .then(res=>{

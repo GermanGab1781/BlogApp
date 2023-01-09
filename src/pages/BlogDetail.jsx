@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -9,12 +9,12 @@ const BlogDetail = () => {
 
   useEffect(()=>{
     const blogId = params.id
-    const endPoint = `https://librarycommerce-node-api.onrender.com/api/blogs/${blogId}`
+    const endPoint = `api/blogs/${blogId}`
     axios.get(endPoint)
       .then((res)=>{
         setBlog(res.data)
         console.log(res.data)
-        const endPoint2 = `https://librarycommerce-node-api.onrender.com/api/users/${res.data.userId}`
+        const endPoint2 = `api/users/userProfile/${res.data.userId}`
         axios.get(endPoint2)
           .then((resp)=>{
             setBlogUser(resp.data)

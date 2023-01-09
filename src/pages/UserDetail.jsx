@@ -1,22 +1,25 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BlogMiniature from '../components/BlogMiniature';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+
 
 const UserDetail = () => {
+  const axiosPrivate = useAxiosPrivate()
   const params = useParams()
   const [user,setUser]= useState(undefined)
   const [userBlogs,setUserBlogs] =useState(undefined)
 
   useEffect(()=>{
     const userId = params.id
-    const endPoint = `https://librarycommerce-node-api.onrender.com/api/users/${userId}`
+    const endPoint = `/api/users/userProfile/${userId}`
     axios.get(endPoint)
       .then((res)=>{
         setUser(res.data)
       })
-    const endPoint2 =`https://librarycommerce-node-api.onrender.com/api/blogs/userBlogs/${userId}`
-    axios.get(endPoint2)
+    const endPoint2 =`/api/blogs/userBlogs/${userId}`
+    axiosPrivate.get(endPoint2)
       .then((res)=>{
         setUserBlogs(res.data)
       })
@@ -25,7 +28,7 @@ const UserDetail = () => {
 
   return (
     <div className=''>
-      {(user === undefined && userBlogs === undefined) && <div>LOADING BOOK...</div>}
+      {(user === undefined && userBlogs === undefined) && <div>LOADING user...</div>}
       {user && user.error !== undefined && <div>NO USER WITH THAT ID</div>}
       {(user && user.error === undefined)&&(userBlogs !== undefined) && 
         <div className='flex flex-col'>

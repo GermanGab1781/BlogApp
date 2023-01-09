@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import UseAuth from '../hooks/useAuth';
-import axios from '../api/axios';
+import { axiosPrivate } from '../api/axios';
 import Swal from 'sweetalert2';
 import useRefreshToken from '../hooks/useRefreshToken';
-const LOGIN_URL = '/api/users/login'
+const LOGIN_URL = '/api/users/login' 
 
 
 
@@ -39,12 +39,8 @@ const LoginUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(LOGIN_URL,
+      const response = await axiosPrivate.post(LOGIN_URL,
         JSON.stringify({ email: email, password: pwd }),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true
-        }
       );
       if (response?.data !== undefined) {
         const accessToken = response?.data?.accessToken

@@ -29,9 +29,9 @@ function App() {
             <Route path="/usersCatalog" element={<PersistLogin><PrivateRoute><UsersCatalog/></PrivateRoute></PersistLogin>}/>
             
             {/* Public Routes */}
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}/>
             <Route path="/" element={<PublicRoute><Login/></PublicRoute>}/>
-            <Route path="/*" element={<NoRoute/>}/>            
+            <Route path="/*" element={<PublicRoute><NoRoute/></PublicRoute>}/>            
           </Routes>  
       </BrowserRouter>
      

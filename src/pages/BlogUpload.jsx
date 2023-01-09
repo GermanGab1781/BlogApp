@@ -1,25 +1,33 @@
 import React from 'react'
-import axios from 'axios'
-/* import { useAuthContext } from '../context/authContext' */
 import Swal from 'sweetalert2';
+import { axiosPrivate } from '../api/axios';
+const UPLOAD_URL = '/api/blogs/'
 
 export default function BlogUpload() {
 
- /*  const {userInformation} = useAuthContext(); */
 
-  const handleBlogUpload = e =>{
+  const handleBlogUpload = async (e) =>{
     e.preventDefault()
     const title = e.target.title.value
     const overview = e.target.overview.value
     const writer = e.target.writer.value
     const sellCount = e.target.sellCount.value
-    /* const userId = userInformation().id */
     const userId = 1
     Swal.fire({title:'Uploading blog...',icon:'question'})
-    axios.post('https://librarycommerce-node-api.onrender.com/api/blogs',{title,overview,sellCount,writer,userId})
+    try {
+      const response = await axiosPrivate.post(UPLOAD_URL,
+        JSON.stringify({title,overview,sellCount,writer,userId}),
+      )
+      if (response?.data){
+        Swal.fire({title:'Success',icon:'success'})
+      }
+    } catch (err) {
+      console.log(err)
+    }
+    /* axios.post(UPLOAD_URL,{title,overview,sellCount,writer,userId})
       .then(()=>{
         Swal.fire({title:'Blog uploaded',icon:'success',showConfirmButton:false,timer:1300})
-      })
+      }) */
   }
 
   return (
