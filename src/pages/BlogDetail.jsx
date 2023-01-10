@@ -1,8 +1,9 @@
-import axios from '../api/axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const BlogDetail = () => {
+  const axiosPrivate = useAxiosPrivate()
   const params = useParams()
   const [blog,setBlog]= useState(undefined)
   const [blogUser,setBlogUser] = useState(undefined)
@@ -10,15 +11,13 @@ const BlogDetail = () => {
   useEffect(()=>{
     const blogId = params.id
     const endPoint = `api/blogs/${blogId}`
-    axios.get(endPoint)
+    axiosPrivate.get(endPoint)
       .then((res)=>{
         setBlog(res.data)
-        console.log(res.data)
         const endPoint2 = `api/users/userProfile/${res.data.userId}`
-        axios.get(endPoint2)
-          .then((resp)=>{
-            setBlogUser(resp.data)
-            console.log(resp.data)
+        axiosPrivate.get(endPoint2)
+          .then((res2)=>{
+            setBlogUser(res2.data)
           })
       })
 

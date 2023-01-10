@@ -1,33 +1,30 @@
 import React from 'react'
 import Swal from 'sweetalert2';
-import { axiosPrivate } from '../api/axios';
+import UseAuth from '../hooks/useAuth';
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
 const UPLOAD_URL = '/api/blogs/'
 
 export default function BlogUpload() {
-
+  const axiosPrivate = useAxiosPrivate()
+  const {auth} = UseAuth();
 
   const handleBlogUpload = async (e) =>{
     e.preventDefault()
     const title = e.target.title.value
-    const overview = e.target.overview.value
+    const text = e.target.text.value
     const writer = e.target.writer.value
     const sellCount = e.target.sellCount.value
-    const userId = 1
+    const userId = auth.userId
     Swal.fire({title:'Uploading blog...',icon:'question'})
     try {
       const response = await axiosPrivate.post(UPLOAD_URL,
-        JSON.stringify({title,overview,sellCount,writer,userId}),
+        JSON.stringify({title,text,sellCount,writer,userId}),
       )
       if (response?.data){
         Swal.fire({title:'Success',icon:'success'})
       }
     } catch (err) {
-      console.log(err)
     }
-    /* axios.post(UPLOAD_URL,{title,overview,sellCount,writer,userId})
-      .then(()=>{
-        Swal.fire({title:'Blog uploaded',icon:'success',showConfirmButton:false,timer:1300})
-      }) */
   }
 
   return (
@@ -36,7 +33,7 @@ export default function BlogUpload() {
           <label>Titulo</label>
           <input className='border border-black text-center text-black' type='text' name='title'/>
           <label>Descripcion</label>
-          <input className='border border-black text-center text-black' type='text' name='overview'/>
+          <input className='border border-black text-center text-black' type='text' name='text'/>
           <label>Autor</label>
           <input className='border border-black text-center text-black' type='text' name='writer'/>
           <label>Ventas Totales</label>

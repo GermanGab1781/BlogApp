@@ -1,18 +1,18 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import axios, { axiosPrivate } from '../api/axios'
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import BlogMiniature from '../components/BlogMiniature'
 const BLOGS= '/api/blogs/'
 
 export default function BlogsCatalog() {
   
   const [blogs,setBlogs] = useState(false)
+  const axiosPrivate = useAxiosPrivate()
 
   useEffect(()=>{
     axiosPrivate.get(BLOGS
     ).then(res=>{
         setBlogs(res.data)
-        console.log(res.data)
       })
   },[setBlogs])
 

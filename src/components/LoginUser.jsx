@@ -45,7 +45,8 @@ const LoginUser = () => {
       if (response?.data !== undefined) {
         const accessToken = response?.data?.accessToken
         const role = response?.data?.Role
-        setAuth({ email, pwd, accessToken, role })
+        const userId = response?.data?.UserId
+        setAuth({ email, pwd, accessToken, role,userId })
         setEmail('')
         setPwd('')
         setSuccess(true)
@@ -57,13 +58,12 @@ const LoginUser = () => {
   }
 
   return (
-    <section className='flex flex-col place-items-center'>
-      {success && <div>bruh</div>}
+    <section className='flex flex-col place-items-center text-black'>
       <p ref={errorInputRef} className={errMsg ? "bg-red-600 border border-red-700 opacity-100" : "opacity-0"} aria-live="assertive">
         {errMsg}
       </p>
-      <h1>Sign In</h1>
-      <form className='flex flex-col text-center place-items-center' onSubmit={handleSubmit}>
+      <h1 className='text-3xl '>Sign In</h1>
+      <form className='flex flex-col gap-y-5 text-center my-auto' onSubmit={handleSubmit}>
         {/* Email */}
         <label htmlFor='Email'>Email</label>
         <input className='text-black'
@@ -83,7 +83,6 @@ const LoginUser = () => {
           value={pwd}
           required
         />
-        <button type='submit'>Sign In</button>
         <div>
           <input 
             type ='checkbox'
@@ -93,13 +92,8 @@ const LoginUser = () => {
           />
           <label htmlFor='persist'>I trust this device</label>
         </div>
+        <button className='bg-blue-500 p-4 text-white' type='submit'>Sign In</button>
       </form>
-      <p>
-        Not registered?<br />
-        <NavLink className='underline' to="/home">Sign Up</NavLink><br />
-        <button onClick={() => { console.log(auth) }}>Auth token</button><br />
-        <button onClick={() => refresh()}>refresh</button><br />
-      </p>
     </section>
   );
 }

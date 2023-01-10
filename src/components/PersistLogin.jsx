@@ -13,7 +13,7 @@ const PersistLogin = ({ children }) => {
       try {
         await refresh();
       } catch (error) {
-        console.log(error)
+        
       } finally {
         isMounted && setIsLoading(false)
       }
