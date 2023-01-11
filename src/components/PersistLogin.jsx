@@ -13,7 +13,7 @@ const PersistLogin = ({ children }) => {
       try {
         await refresh();
       } catch (error) {
-        
+        console.log(error)
       } finally {
         isMounted && setIsLoading(false)
       }
@@ -24,10 +24,10 @@ const PersistLogin = ({ children }) => {
     return () => isMounted = false;
   }, [auth,refresh])
 
- /*  useEffect(() => {
-    console.log('is loading = ' + isLoading)
-    console.log('at:' + JSON.stringify(auth?.accessToken))
-  }, [isLoading]) */
+  useEffect(() => {
+    console.log(`is loading = ${isLoading}`)
+    console.log(`at: ${JSON.stringify(auth?.accessToken)}`)
+  }, [isLoading,auth]) 
 
   return (
     <>
