@@ -34,7 +34,7 @@ const PersistLogin = ({ children }) => {
       {!persist
         ? children
         : isLoading 
-          ? <div>Loading your page!!!</div>
+          ? <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Loading your page!!!</div>
           : children
       }
     </>

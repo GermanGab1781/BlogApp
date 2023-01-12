@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 
 const PrivateRoute = ({ children }) => {
     const {auth} = useAuth()
-    return auth?.role === "User" ? children : <Navigate to="/login"/> 
+    return auth?.role === ("User" || "Admin") ? children : <Navigate to="/login"/> 
 }
 
 export default PrivateRoute;

@@ -24,7 +24,7 @@ const UserDetail = () => {
         setUserBlogs(res.data)
       })
     
-  },[setUser,params])
+  },[setUser,params,axiosPrivate])
 
   return (
     <div className=''>
@@ -33,28 +33,25 @@ const UserDetail = () => {
       {(user && user.error === undefined)&&(userBlogs !== undefined) && 
         <div className='flex flex-col'>
           {/* User Info */}
-          <div className='text-center'>
+          <div className='text-center border-b-2 pb-3 mb-5'>
             <span className='text-5xl'>{user.username}</span>
           </div>
 
           {/* User Blogs */}
           {userBlogs.length > 0 &&
-          <div className='border-t-2 text-center flex flex-row flex-wrap place-content-evenly'>
+          <div className=' text-center flex flex-row flex-wrap place-content-evenly'>
             {userBlogs.map((blog,index)=>{
               let path = '/blog/'+ blog.id
               return(
-                <BlogMiniature location={path} title={blog.title} key={index}/>
+                <BlogMiniature location={path} title={blog.title} key={index} text={blog.text}/>
               )
             })}
           </div>}
-          {userBlogs.length === 0 && <div className='border-t-2 text-3xl h-48 w-scren relative'>
-            <span className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>No blogs uploaded yet :)</span>
+          {userBlogs.length === 0 && <div className='text-3xl h-48 w-scren relative'>
+            <span className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center'>No blogs uploaded yet :)</span>
           </div>}
-        </div>
-      
+        </div>      
       }
-
-      
     </div>
   );
 }

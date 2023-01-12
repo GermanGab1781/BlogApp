@@ -42,14 +42,17 @@ const LoginUser = () => {
           withCredentials: true
         }
       );
-      if (response?.data !== undefined) {
+      if (response?.data.error === undefined) {
         const accessToken = response?.data?.accessToken
         const role = response?.data?.Role
-        const userId = response?.data?.UserId
-        setAuth({ email, pwd, accessToken, role,userId })
+        const UserId = response?.data?.UserId
+        const username = response?.data?.username
+        setAuth({username,role,accessToken, UserId })
         setEmail('')
         setPwd('')
         Swal.fire({ icon: "success", title: "Login successful" })
+      }else{
+        Swal.fire({icon:'error',title:response.data.error})
       }
     } catch (error) {
       console.log(error)
@@ -57,7 +60,7 @@ const LoginUser = () => {
   }
 
   return (
-    <section className='flex flex-col place-items-center text-black'>
+    <section className='flex flex-col place-items-center '>
       <p ref={errorInputRef} className={errMsg ? "bg-red-600 border border-red-700 opacity-100" : "opacity-0"} aria-live="assertive">
         {errMsg}
       </p>

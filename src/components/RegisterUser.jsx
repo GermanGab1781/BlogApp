@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
 import axios from '../api/axios';
 import Swal from 'sweetalert2'
 
@@ -98,7 +97,7 @@ export default function RegisterUser() {
 
   return (
     <>{!success ?
-      <section className='text-black flex flex-col gap-y-5 text-center'>
+      <section className=' flex flex-col gap-y-5 text-center'>
         <p ref={errorInputRef} className={errMsg ? "bg-red-600 border border-red-700 opacity-100" : "opacity-0"} aria-live="assertive">
           {errMsg}
         </p>
@@ -108,7 +107,7 @@ export default function RegisterUser() {
           <div className='relative flex flex-col place-items-center'>
             <label className='relative mb-3' htmlFor='username'>
               Username
-              <span className='absolute -right-5'>
+              <span className='absolute -right-5 text-black'>
                 <span className={validUser ? "visible absolute" : "invisible absolute"}>&#9745;</span>
                 <span className={validUser || !user ? "invisible absolute" : " bg-red-700 visible absolute"}>&#9746;</span>
               </span>
@@ -124,7 +123,7 @@ export default function RegisterUser() {
               aria-describedby="uidnote"
               onFocus={() => { setUserFocus(true) }}
               onBlur={() => { setUserFocus(false) }}
-              className=""
+              className="text-black"
             />
             <p id="uidnote" className={userFocus && user && !validUser ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-1/2 -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700" : "absolute invisible"}>
               Minimum eight characters<br />
@@ -136,7 +135,7 @@ export default function RegisterUser() {
           <div className='relative flex flex-col place-items-center'>
             <label className='relative mb-3' htmlFor='Email'>
               Email
-              <span className='absolute -right-5'>
+              <span className='absolute -right-5 text-black'>
                 <span className={validEmail ? "visible absolute" : "invisible absolute"}>&#9745;</span>
                 <span className={validEmail || !email ? "invisible absolute" : "bg-red-700 visible absolute"}>&#9746;</span>
               </span>
@@ -152,7 +151,7 @@ export default function RegisterUser() {
               aria-describedby="emailnote"
               onFocus={() => { setEmailFocus(true) }}
               onBlur={() => { setEmailFocus(false) }}
-              className=""
+              className="text-black"
             />
             <p id="emailnote" className={emailFocus && email && !validEmail ? "absolute md:top-1/2 md:bottom-auto bottom-1/2 left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 opacity-100 bg-red-500 border border-red-700" : "absolute invisible bg-red-500"}>
               Must be a valid email!
@@ -162,7 +161,7 @@ export default function RegisterUser() {
           <div className='relative flex flex-col place-items-center'>
             <label className='relative mb-3' htmlFor='Password'>
               Password
-              <span className='absolute -right-5'>
+              <span className='absolute -right-5 text-black'>
                 <span className={validPwd ? "visible absolute" : "invisible absolute"}>&#9745;</span>
                 <span className={validPwd || !pwd ? "invisible absolute" : "bg-red-700 visible absolute"}>&#9746;</span>
               </span>
@@ -176,18 +175,18 @@ export default function RegisterUser() {
               aria-describedby="pwdnote"
               onFocus={() => { setPwdFocus(true) }}
               onBlur={() => { setPwdFocus(false) }}
-              className=""
+              className="text-black"
             />
             <p id="pwdnote" className={pwdFocus && pwd && !validPwd ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700" : "absolute invisible bg-red-500"}>
               8-24 Characters <br />
-              Must include uppercase and lowercase letters and a number
+              Must include letters and a number
             </p>
           </div>
           {/* Confirm Password */}
           <div className='flex flex-col place-items-center'>
             <label className='relative mb-3' htmlFor='Match'>
               Confirm Password
-              <span className='absolute right-1'>
+              <span className='absolute right-1 text-black'>
                 <span className={validMatch && (match !== '') ? "visible absolute -right-8" : "absolute invisible"}>&#9745;</span>
                 <span className={validMatch || !match ? "absolute invisible" : "bg-red-700 visible absolute -right-8"}>&#9746;</span>
               </span>
@@ -201,9 +200,9 @@ export default function RegisterUser() {
               aria-describedby="matchnote"
               onFocus={() => { setMatchFocus(true) }}
               onBlur={() => { setMatchFocus(false) }}
-              className=""
+              className="text-black"
             />
-            <p className='relative text-center' id="matchnote">
+            <p className='relative text-center text-black' id="matchnote">
               <span className={match && !validMatch && matchFocus && pwd !== '' ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700" : "invisible absolute"} >Passwords are different!!</span><br />
               <span className={pwd === '' && match ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700" : "invisible absolute"}>Password field is empty</span>
             </p>

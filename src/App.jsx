@@ -29,9 +29,10 @@ function App() {
             <Route path="/usersCatalog" element={<PersistLogin><PrivateRoute><UsersCatalog/></PrivateRoute></PersistLogin>}/>
             
             {/* Public Routes */}
-            <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}/>
-            <Route path="/" element={<PublicRoute><Login/></PublicRoute>}/>
-            <Route path="/*" element={<PublicRoute><NoRoute/></PublicRoute>}/>            
+            <Route path="/login" element={<PersistLogin><PublicRoute><Login/></PublicRoute></PersistLogin>}/>
+            <Route path="/" element={<PersistLogin><PublicRoute><Login/></PublicRoute></PersistLogin>}/>
+            <Route path="/BlogApp" element={<PersistLogin><PublicRoute><Login/></PublicRoute></PersistLogin>}/>
+            <Route path="/*" element={<PersistLogin><PublicRoute><NoRoute/></PublicRoute></PersistLogin>}/>            
           </Routes>  
       </BrowserRouter>
      
