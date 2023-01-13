@@ -4,7 +4,7 @@ import { useState } from 'react'
 import axios from '../api/axios';
 import Swal from 'sweetalert2'
 
-const USER_REGEX = /^[A-Za-z][A-Za-z0-9_]{3,24}$/
+const USER_REGEX = /^[A-Za-z][A-Za-z0-9_]{8,24}$/
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/
 const EMAIL_REGEX = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
 const REGISTER_URL = '/api/users/register'
@@ -79,8 +79,8 @@ export default function RegisterUser() {
           withCredentials: true
         })
       setSuccess(true)
-      Swal.fire({ icon: 'success', title: 'Registracion completa' })
       console.log(response)
+      Swal.fire({ icon: 'success', title: 'Registracion completa' })
     } catch (error) {
       console.log(error)
       if (!error?.response) {
