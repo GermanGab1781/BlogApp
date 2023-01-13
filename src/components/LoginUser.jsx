@@ -84,6 +84,8 @@ const LoginUser = () => {
           onChange={(e) => setPwd(e.target.value)}
           value={pwd}
           required
+          maxLength='24'
+          minLength='8'
         />
         <div>
           <input 

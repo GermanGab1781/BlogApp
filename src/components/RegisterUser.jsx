@@ -124,9 +124,12 @@ export default function RegisterUser() {
               onFocus={() => { setUserFocus(true) }}
               onBlur={() => { setUserFocus(false) }}
               className="text-black"
+              maxLength='20'
+              minLength='8'
             />
             <p id="uidnote" className={userFocus && user && !validUser ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-1/2 -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700" : "absolute invisible"}>
-              Minimum eight characters<br />
+              Minimum 8 characters<br />
+              Max 20 characters<br />
               At least one letter and one number<br />
               Letters,underscores,numbers are allowed
             </p>
@@ -176,6 +179,8 @@ export default function RegisterUser() {
               onFocus={() => { setPwdFocus(true) }}
               onBlur={() => { setPwdFocus(false) }}
               className="text-black"
+              maxLength='24'
+              minLength='8'
             />
             <p id="pwdnote" className={pwdFocus && pwd && !validPwd ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700" : "absolute invisible bg-red-500"}>
               8-24 Characters <br />
@@ -201,6 +206,8 @@ export default function RegisterUser() {
               onFocus={() => { setMatchFocus(true) }}
               onBlur={() => { setMatchFocus(false) }}
               className="text-black"
+              maxLength='24'
+              minLength='8'
             />
             <p className='relative text-center text-black' id="matchnote">
               <span className={match && !validMatch && matchFocus && pwd !== '' ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700" : "invisible absolute"} >Passwords are different!!</span><br />

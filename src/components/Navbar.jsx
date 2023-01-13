@@ -28,8 +28,8 @@ const Navbar = () => {
           {isMobile
             /* Mobile */
             ? <div className={navButton
-              ? 'fixed w-screen h-16 top-0 bg-black text-white p-2 z-20 transition-all ease-in-out duration-1000 delay-75'
-              : 'fixed w-screen h-screen top-0 bg-black text-white p-2 z-20 transition-all ease-in-out duration-1000 '
+              ? 'fixed w-screen h-16 top-0 bg-blue-700 text-white p-2 z-20 transition-all ease-in-out duration-1000 delay-75'
+              : 'fixed w-screen h-screen top-0 bg-blue-900 text-white p-2 z-20 transition-all ease-in-out duration-1000 '
             }>
               {/* Items */}
               <div className='flex flex-row place-content-between place-items-center text-3xl font-semibold'>
@@ -52,7 +52,7 @@ const Navbar = () => {
               </div>
             </div>
             /* Desktop */
-            : <div className='fixed flex flex-row place-content-between w-screen top-0 bg-black text-white p-2 pr-5 z-20'>
+            : <div className='fixed flex flex-row place-content-between w-screen top-0 bg-blue-600 text-white p-2 pr-5 z-20'>
               <div>
                 <NavLink className='text-2  xl mr-5' to="/home">&#9733;Home&#9733;</NavLink>
                 <NavLink to={pathProfile}>My profile</NavLink>
