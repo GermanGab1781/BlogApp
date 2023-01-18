@@ -113,10 +113,10 @@ export default function RegisterUser() {
               </span>
             </label>
             <input
+              autoComplete="off"
               type="text"
               id="username"
               ref={userInputRef}
-              autoComplete="off"
               onChange={(e) => setUser(e.target.value)}
               required
               aria-invalid={validUser ? "bg-red-500" : "bg-blue-500"}
@@ -144,10 +144,10 @@ export default function RegisterUser() {
               </span>
             </label>
             <input
+              autoComplete="off"
               type="email"
               id="Email"
               ref={emailInputRef}
-              autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
               required
               aria-invalid={validEmail ? "bg-red-500" : "bg-blue-500"}
@@ -170,6 +170,7 @@ export default function RegisterUser() {
               </span>
             </label>
             <input
+              autoComplete="off"
               type="password"
               id="Password"
               onChange={(e) => setPwd(e.target.value)}
@@ -197,6 +198,7 @@ export default function RegisterUser() {
               </span>
             </label>
             <input
+              autoComplete="off"
               type="password"
               id="Match"
               onChange={(e) => setMatch(e.target.value)}
