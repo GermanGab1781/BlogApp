@@ -4,6 +4,7 @@ import useLogout from '../hooks/useLogout';
 import UseAuth from '../hooks/useAuth';
 import { useMediaQuery } from 'react-responsive';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
   const { auth } = UseAuth()
@@ -18,6 +19,7 @@ const Navbar = () => {
 
   const SignOut = async () => {
     setNavButton(!navButton)
+    Swal.fire({ icon: "info", title: "Login Out" })
     await logout()
   }
 

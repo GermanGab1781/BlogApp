@@ -25,7 +25,11 @@ const LoginUser = () => {
   }, [email, pwd])
 
   const togglePersist = () =>{
-    setPersist(prev => !prev)
+    if(persist === false){
+      setPersist(true)
+    }else{
+      setPersist(false)
+    }
   }
   
   useEffect(()=>{
@@ -34,6 +38,7 @@ const LoginUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    Swal.fire({ icon: "info", title: "Login you In" })
     try {
       const response = await axios.post(LOGIN_URL,
         JSON.stringify({ email: email, password: pwd }),
