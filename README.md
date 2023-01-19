@@ -1,5 +1,6 @@
 <h1><a href="https://blog-app-gold-two.vercel.app/" target="_blank" rel="noreferrer">Blog App</a></h1>
 <p>Users can Login/Register and post blogs.</p>
+<a href="https://github.com/GermanGab1781/BlogApp-node-api" target="_blank" rel="noreferrer"><p>Backend code</p></a>
 
 <h3><strong>For this project i used:</strong></h3>
 <ul>
