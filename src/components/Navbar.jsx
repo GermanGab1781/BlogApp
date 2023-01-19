@@ -48,7 +48,6 @@ const Navbar = () => {
               }>
                 <NavLink to={pathProfile} onClick={()=>setNavButton(!navButton)}>My profile</NavLink>
                 <NavLink className='' to="/blogUpload" onClick={()=>setNavButton(!navButton)}>&#128214;Upload a blog&#128214;</NavLink>
-                <NavLink className='' to="/blogsCatalog" onClick={()=>setNavButton(!navButton)}>&#10025;All Blogs&#10025;</NavLink>
                 <NavLink className='' to="/usersCatalog" onClick={()=>setNavButton(!navButton)}>&#10084;Our Users&#10084;</NavLink>                
                 <button className='' onClick={SignOut}>Logout</button>
               </div>
@@ -65,7 +64,6 @@ const Navbar = () => {
               </div>
               <div>
                 <NavLink className='' to="/blogUpload">Upload a blog &#128214;</NavLink>
-                <NavLink className='ml-5' to="/blogsCatalog">&#10025;All Blogs&#10025;</NavLink>
                 <NavLink className='ml-5' to="/usersCatalog">Our Users &#10084;</NavLink>
                 <button className='ml-5' onClick={SignOut}>Logout</button>
               </div>

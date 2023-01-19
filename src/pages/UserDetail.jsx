@@ -28,8 +28,8 @@ const UserDetail = () => {
 
   return (
     <div className=''>
-      {(user === undefined && userBlogs === undefined) && <div>LOADING user...</div>}
-      {user && user.error !== undefined && <div>NO USER WITH THAT ID</div>}
+      {(user === undefined && userBlogs === undefined) && <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Loading profile...</div>}
+      {user && user.error !== undefined && <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>NO USER WITH THAT ID</div>}
       {(user && user.error === undefined)&&(userBlogs !== undefined) && 
         <div className='flex flex-col'>
           {/* User Info */}

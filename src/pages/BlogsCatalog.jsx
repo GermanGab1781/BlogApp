@@ -6,7 +6,7 @@ const BLOGS = '/api/blogs/'
 
 export default function BlogsCatalog() {
 
-  const [blogs, setBlogs] = useState(false)
+  const [blogs, setBlogs] = useState(undefined)
   const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export default function BlogsCatalog() {
 
   return (
     <div>
-      {blogs === undefined && <div>LOADING BLOGS...</div>}
-      {(blogs && blogs.length === 0) && <div>No Blogs found</div>}
+      {blogs === undefined && <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Loading Blogs...</div>}
+      {(blogs && blogs.length === 0) && <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>No Blogs found</div>}
       {blogs &&
         <div className='flex flex-col gap-y-5'>
           <h1 className='text-3xl text-center'>Feed</h1>
