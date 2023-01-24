@@ -36,6 +36,7 @@ export default function RegisterUser() {
   const [errMsg, setErrMsg] = useState('')
   const [success, setSuccess] = useState(false)
 
+  const [wait, setWait] = useState(false)
 
   useEffect(() => {
     userInputRef.current.focus()
@@ -73,20 +74,21 @@ export default function RegisterUser() {
       return;
     }
     try {
+      setWait(true)
+      Swal.fire({ icon: 'info', title: 'Please wait...' })
       const response = await axios.post(REGISTER_URL, JSON.stringify({ username: user, email: email, password: pwd }),
         {
           headers: { 'Content-type': 'application/json' },
           withCredentials: true
         })
       setSuccess(true)
-      console.log(response)
-      Swal.fire({ icon: 'success', title: 'Registracion completa' })
+      Swal.fire({ icon: 'success', title: 'Register complete!' })
     } catch (error) {
-      console.log(error)
+      setWait(false)
       if (!error?.response) {
         Swal.fire({ title: 'Error!', text: 'No Server response', icon: 'error' })
       } else if (error.response?.status === 409) {
-        Swal.fire({ title: 'Error!', text: 'Username Taken', icon: 'error' })
+        Swal.fire({ title: 'Error!', text: `${error.response.data.error}`, icon: 'error' })
       } else {
         Swal.fire({ title: 'Error!', text: 'Registration failed', icon: 'error' })
       }
@@ -216,7 +218,7 @@ export default function RegisterUser() {
               <span className={pwd === '' && match ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700" : "invisible absolute"}>Password field is empty</span>
             </p>
           </div>
-          <button type='submit' className={!validUser || !validEmail || !validPwd || !validMatch ? 'bg-slate-300 p-4 text-black' : 'bg-blue-500 p-4 text-white'} disabled={!validUser || !validEmail || !validPwd || !validMatch ? true : false}>Register!</button>
+          <button type='submit' className={!validUser || !validEmail || !validPwd || !validMatch || wait ? 'bg-slate-300 p-4 text-black' : 'bg-blue-500 p-4 text-white'} disabled={!validUser || !validEmail || !validPwd || !validMatch || wait ? true : false}>Register!</button>
         </form>
       </section>
       : <div className='text-white'>Registration done!!</div>}

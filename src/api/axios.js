@@ -1,6 +1,6 @@
 import axios from "axios";
-const BASE_URL = 'https://blog-app-node-api.onrender.com'
-/* 'http://localhost:3001' */
+const BASE_URL =  'https://blog-app-node-api.onrender.com' 
+/*  'http://localhost:3001'  */
 
 export default axios.create({
   baseURL: BASE_URL
