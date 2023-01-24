@@ -3,12 +3,12 @@ import { useRef } from 'react';
 import useAuth from '../hooks/useAuth';
 import axios from '../api/axios'
 import Swal from 'sweetalert2';
-const LOGIN_URL = '/api/users/login' 
+const LOGIN_URL = '/api/users/login'
 
 
 
 const LoginUser = () => {
-  const {setAuth, persist ,setPersist } = useAuth()
+  const { setAuth, persist, setPersist } = useAuth()
   const emailInputRef = useRef()
   const errorInputRef = useRef()
 
@@ -16,6 +16,7 @@ const LoginUser = () => {
   const [pwd, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
 
+  const [wait, setWait] = useState(false)
   useEffect(() => {
     emailInputRef.current.focus()
   }, [])
@@ -24,22 +25,23 @@ const LoginUser = () => {
     setErrMsg('');
   }, [email, pwd])
 
-  const togglePersist = () =>{
-    if(persist === false){
+  const togglePersist = () => {
+    if (persist === false) {
       setPersist(true)
-    }else{
+    } else {
       setPersist(false)
     }
   }
-  
-  useEffect(()=>{
-    localStorage.setItem("persist",persist)
-  },[persist])
+
+  useEffect(() => {
+    localStorage.setItem("persist", persist)
+  }, [persist])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     Swal.fire({ icon: "info", title: "Login you In" })
     try {
+      setWait(true)
       const response = await axios.post(LOGIN_URL,
         JSON.stringify({ email: email, password: pwd }),
         {
@@ -52,12 +54,13 @@ const LoginUser = () => {
         const role = response?.data?.Role
         const UserId = response?.data?.UserId
         const username = response?.data?.username
-        setAuth({username,role,accessToken, UserId })
+        setAuth({ username, role, accessToken, UserId })
         setEmail('')
         setPwd('')
         Swal.fire({ icon: "success", title: "Login successful" })
-      }else{
-        Swal.fire({icon:'error',title:response.data.error})
+      } else {
+        Swal.fire({ icon: 'error', title: response.data.error })
+        setWait(false)
       }
     } catch (error) {
       console.log(error)
@@ -93,15 +96,15 @@ const LoginUser = () => {
           minLength='8'
         />
         <div>
-          <input 
-            type ='checkbox'
+          <input
+            type='checkbox'
             id='persist'
             onChange={togglePersist}
             checked={persist}
           />
           <label htmlFor='persist'>I trust this device</label>
         </div>
-        <button className='bg-blue-500 p-4 text-white' type='submit'>Sign In</button>
+        <button className={wait ? 'bg-slate-300 p-4 text-black' : 'bg-blue-500 p-4 text-white'} type='submit' disabled={wait ? true : false}>Sign In</button>
       </form>
     </section>
   );

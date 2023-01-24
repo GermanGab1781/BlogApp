@@ -53,7 +53,7 @@ const Navbar = () => {
               </div>
             </div>
             /* Desktop */
-            : <div className='fixed flex flex-row place-content-between w-screen top-0 bg-blue-600 text-white p-2 pr-5 z-20'>
+            : <div className='fixed flex flex-row place-content-between place-items-center xl:text-2xl md:text-sm md:h-10 xl:h-16 w-screen top-0 bg-blue-600 text-white p-2 pr-5 z-20'>
               <div>
                 <NavLink className='text-2  xl mr-5' to="/home">&#9733;Home&#9733;</NavLink>
                 <NavLink to={pathProfile}>My profile</NavLink>

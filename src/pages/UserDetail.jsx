@@ -39,7 +39,7 @@ const UserDetail = () => {
 
           {/* User Blogs */}
           {userBlogs.length > 0 &&
-          <div className=' text-center flex flex-row flex-wrap place-content-evenly'>
+          <div className=' text-center flex flex-row flex-wrap gap-x-10 place-content-center'>
             {userBlogs.map((blog,index)=>{
               let path = '/blog/'+ blog.id
               return(
