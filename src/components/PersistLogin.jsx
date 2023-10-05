@@ -5,7 +5,7 @@ import useAuth from "../hooks/useAuth";
 const PersistLogin = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const refresh = useRefreshToken()
-  const { auth, persist ,setAuth} = useAuth()
+  const { auth, persist, setAuth } = useAuth()
 
   useEffect(() => {
     let isMounted = true;
@@ -18,23 +18,23 @@ const PersistLogin = ({ children }) => {
         isMounted && setIsLoading(false)
       }
     }
-    
+
     !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false)
 
     return () => isMounted = false;
-  }, [auth,refresh])
+  }, [auth, refresh])
 
   useEffect(() => {
     console.log(`is loading = ${isLoading}`)
     console.log(`at: ${JSON.stringify(auth?.accessToken)}`)
-  }, [isLoading,auth]) 
+  }, [isLoading, auth])
 
   return (
     <>
       {!persist
         ? children
-        : isLoading 
-          ? <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Loading your page!!!</div>
+        : isLoading
+          ? <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-pulse'>Loading your page!!!</div>
           : children
       }
     </>

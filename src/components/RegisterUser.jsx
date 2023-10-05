@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from '../api/axios';
 import Swal from 'sweetalert2'
+import { motion } from 'framer-motion';
 
 const USER_REGEX = /^[A-Za-z][A-Za-z0-9_]{8,24}$/
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,24}$/
@@ -99,11 +100,11 @@ export default function RegisterUser() {
 
   return (
     <>{!success ?
-      <section className=' flex flex-col gap-y-5 text-center'>
+      <motion.section className=' flex flex-col gap-y-5 text-center group'>
         <p ref={errorInputRef} className={errMsg ? "bg-red-600 border border-red-700 opacity-100" : "opacity-0"} aria-live="assertive">
           {errMsg}
         </p>
-        <h1 className='text-3xl'>Register</h1>
+        <h1 className='text-3xl group-hover:animate-pulse'>Register</h1>
         <form onSubmit={handleSubmit} className='flex flex-col gap-y-5 m-auto'>
           {/* Username */}
           <div className='relative flex flex-col place-items-center'>
@@ -111,7 +112,7 @@ export default function RegisterUser() {
               Username
               <span className='absolute -right-5 text-black'>
                 <span className={validUser ? "visible absolute" : "invisible absolute"}>&#9745;</span>
-                <span className={validUser || !user ? "invisible absolute" : " bg-red-700 visible absolute"}>&#9746;</span>
+                <span className={validUser || !user ? "invisible absolute" : " bg-red-700 visible absolute px-2 rounded-xl text-white"}>&#9746;</span>
               </span>
             </label>
             <input
@@ -125,11 +126,11 @@ export default function RegisterUser() {
               aria-describedby="uidnote"
               onFocus={() => { setUserFocus(true) }}
               onBlur={() => { setUserFocus(false) }}
-              className="text-black"
+              className="text-black p-1 rounded-xl"
               maxLength='20'
               minLength='8'
             />
-            <p id="uidnote" className={userFocus && user && !validUser ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-1/2 -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700" : "absolute invisible"}>
+            <p id="uidnote" className={userFocus && user && !validUser ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-1/2 -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700 rounded-xl p-1 transition-all " : "absolute invisible"}>
               Minimum 8 characters<br />
               Max 20 characters<br />
               At least one letter and one number<br />
@@ -142,7 +143,7 @@ export default function RegisterUser() {
               Email
               <span className='absolute -right-5 text-black'>
                 <span className={validEmail ? "visible absolute" : "invisible absolute"}>&#9745;</span>
-                <span className={validEmail || !email ? "invisible absolute" : "bg-red-700 visible absolute"}>&#9746;</span>
+                <span className={validEmail || !email ? "invisible absolute" : "bg-red-700 visible absolute px-2 rounded-xl text-white"}>&#9746;</span>
               </span>
             </label>
             <input
@@ -156,9 +157,9 @@ export default function RegisterUser() {
               aria-describedby="emailnote"
               onFocus={() => { setEmailFocus(true) }}
               onBlur={() => { setEmailFocus(false) }}
-              className="text-black"
+              className="text-black p-1 rounded-xl"
             />
-            <p id="emailnote" className={emailFocus && email && !validEmail ? "absolute md:top-1/2 md:bottom-auto bottom-1/2 left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 opacity-100 bg-red-500 border border-red-700" : "absolute invisible bg-red-500"}>
+            <p id="emailnote" className={emailFocus && email && !validEmail ? "absolute md:top-1/2 md:bottom-auto bottom-1/2 left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 opacity-100 bg-red-500 border border-red-700 rounded-xl p-1 transition-all" : "absolute invisible bg-red-500"}>
               Must be a valid email!
             </p>
           </div>
@@ -168,7 +169,7 @@ export default function RegisterUser() {
               Password
               <span className='absolute -right-5 text-black'>
                 <span className={validPwd ? "visible absolute" : "invisible absolute"}>&#9745;</span>
-                <span className={validPwd || !pwd ? "invisible absolute" : "bg-red-700 visible absolute"}>&#9746;</span>
+                <span className={validPwd || !pwd ? "invisible absolute" : "bg-red-700 visible absolute px-2 rounded-xl text-white"}>&#9746;</span>
               </span>
             </label>
             <input
@@ -181,11 +182,11 @@ export default function RegisterUser() {
               aria-describedby="pwdnote"
               onFocus={() => { setPwdFocus(true) }}
               onBlur={() => { setPwdFocus(false) }}
-              className="text-black"
+              className="text-black p-1 rounded-xl"
               maxLength='24'
               minLength='8'
             />
-            <p id="pwdnote" className={pwdFocus && pwd && !validPwd ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700" : "absolute invisible bg-red-500"}>
+            <p id="pwdnote" className={pwdFocus && pwd && !validPwd ? "absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 md:-translate-y-1/2 bg-red-500 border border-red-700 rounded-xl p-1 transition-all" : "absolute invisible bg-red-500"}>
               8-24 Characters <br />
               Must include letters and a number
             </p>
@@ -196,7 +197,7 @@ export default function RegisterUser() {
               Confirm Password
               <span className='absolute right-1 text-black'>
                 <span className={validMatch && (match !== '') ? "visible absolute -right-8" : "absolute invisible"}>&#9745;</span>
-                <span className={validMatch || !match ? "absolute invisible" : "bg-red-700 visible absolute -right-8"}>&#9746;</span>
+                <span className={validMatch || !match ? "absolute invisible" : "bg-red-700 visible absolute -right-8 px-2 rounded-xl text-white"}>&#9746;</span>
               </span>
             </label>
             <input
@@ -209,18 +210,18 @@ export default function RegisterUser() {
               aria-describedby="matchnote"
               onFocus={() => { setMatchFocus(true) }}
               onBlur={() => { setMatchFocus(false) }}
-              className="text-black"
+              className="text-black p-1 rounded-xl"
               maxLength='24'
               minLength='8'
             />
             <p className='relative text-center text-black' id="matchnote">
-              <span className={match && !validMatch && matchFocus && pwd !== '' ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700" : "invisible absolute"} >Passwords are different!!</span><br />
-              <span className={pwd === '' && match ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700" : "invisible absolute"}>Password field is empty</span>
+              <span className={match && !validMatch && matchFocus && pwd !== '' ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700 rounded-xl p-1 transition-all text-white" : "invisible absolute"} >Passwords are different!!</span><br />
+              <span className={pwd === '' && match ? "visible absolute md:top-1/2 md:bottom-auto bottom-full left-1/2 transform md:translate-x-full -translate-x-1/2 -translate-y-1/2 bg-red-500 border border-red-700 rounded-xl p-1 transition-all text-white" : "invisible absolute"}>Password field is empty</span>
             </p>
           </div>
-          <button type='submit' className={!validUser || !validEmail || !validPwd || !validMatch || wait ? 'bg-slate-300 p-4 text-black' : 'bg-blue-500 p-4 text-white'} disabled={!validUser || !validEmail || !validPwd || !validMatch || wait ? true : false}>Register!</button>
+          <button type='submit' className={!validUser || !validEmail || !validPwd || !validMatch || wait ? 'bg-slate-300 p-4 text-black rounded-md' : 'bg-blue-500 p-4 text-white rounded-md'} disabled={!validUser || !validEmail || !validPwd || !validMatch || wait ? true : false}>Register!</button>
         </form>
-      </section>
+      </motion.section>
       : <div className='text-white'>Registration done!!</div>}
     </>
   )

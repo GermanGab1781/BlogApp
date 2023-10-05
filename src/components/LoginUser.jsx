@@ -3,8 +3,10 @@ import { useRef } from 'react';
 import useAuth from '../hooks/useAuth';
 import axios from '../api/axios'
 import Swal from 'sweetalert2';
-const LOGIN_URL = '/api/users/login'
+import { motion } from 'framer-motion';
 
+const LOGIN_URL = '/api/users/login'
+const EMAIL_REGEX = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
 
 
 const LoginUser = () => {
@@ -39,44 +41,49 @@ const LoginUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    Swal.fire({ icon: "info", title: "Login you In" })
-    try {
-      setWait(true)
-      const response = await axios.post(LOGIN_URL,
-        JSON.stringify({ email: email, password: pwd }),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true
+    if (EMAIL_REGEX.test(email)) {
+      Swal.fire({ icon: "info", title: "Login you In" })
+      try {
+        setWait(true)
+        const response = await axios.post(LOGIN_URL,
+          JSON.stringify({ email: email, password: pwd }),
+          {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+          }
+        );
+        if (response?.data.error === undefined) {
+          const accessToken = response?.data?.accessToken
+          const role = response?.data?.Role
+          const UserId = response?.data?.UserId
+          const username = response?.data?.username
+          setAuth({ username, role, accessToken, UserId })
+          setEmail('')
+          setPwd('')
+          Swal.fire({ icon: "success", title: "Login successful" })
+        } else {
+          Swal.fire({ icon: 'error', title: response.data.error })
+          setWait(false)
         }
-      );
-      if (response?.data.error === undefined) {
-        const accessToken = response?.data?.accessToken
-        const role = response?.data?.Role
-        const UserId = response?.data?.UserId
-        const username = response?.data?.username
-        setAuth({ username, role, accessToken, UserId })
-        setEmail('')
-        setPwd('')
-        Swal.fire({ icon: "success", title: "Login successful" })
-      } else {
-        Swal.fire({ icon: 'error', title: response.data.error })
-        setWait(false)
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
+    } else {
+      Swal.fire({ icon: "error", title: "Enter a valid email please" })
     }
+
   }
 
   return (
-    <section className='flex flex-col place-items-center '>
+    <motion.section className='flex flex-col place-items-center group '>
       <p ref={errorInputRef} className={errMsg ? "bg-red-600 border border-red-700 opacity-100" : "opacity-0"} aria-live="assertive">
         {errMsg}
       </p>
-      <h1 className='text-3xl '>Sign In</h1>
+      <h1 className='text-3xl group-hover:animate-pulse '>Sign In</h1>
       <form className='flex flex-col gap-y-5 text-center my-auto' onSubmit={handleSubmit}>
         {/* Email */}
         <label htmlFor='Email'>Email</label>
-        <input className='text-black'
+        <input className='text-black p-2 rounded-xl'
           type='text'
           id='Email'
           ref={emailInputRef}
@@ -86,7 +93,7 @@ const LoginUser = () => {
         />
         {/* Password */}
         <label htmlFor='Password'>Password</label>
-        <input className='text-black'
+        <input className='text-black p-2 rounded-xl'
           type='password'
           id='Password'
           onChange={(e) => setPwd(e.target.value)}
@@ -104,9 +111,9 @@ const LoginUser = () => {
           />
           <label htmlFor='persist'>I trust this device</label>
         </div>
-        <button className={wait ? 'bg-slate-300 p-4 text-black' : 'bg-blue-500 p-4 text-white'} type='submit' disabled={wait ? true : false}>Sign In</button>
+        <button className={wait ? 'bg-slate-300 p-4 text-black rounded-md' : 'bg-blue-500 p-4 text-white rounded-md'} type='submit' disabled={wait ? true : false}>Sign In</button>
       </form>
-    </section>
+    </motion.section>
   );
 }
 
