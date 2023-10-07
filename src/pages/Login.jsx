@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 const Login = () => {
   useEffect(() => {
-    //Swal.fire({ icon: "info", title: "Attention", text: "It may take some time to respond to petitions at first." })
+    Swal.fire({ icon: "info", title: "Attention", text: "It may take some time to respond to petitions at first." })
   })
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className='flex flex-col md:h-screen bg-blue-700 -mt-20'>
