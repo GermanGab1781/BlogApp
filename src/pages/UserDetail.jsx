@@ -3,56 +3,59 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import BlogMiniature from '../components/BlogMiniature';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { motion } from 'framer-motion';
 
 
 const UserDetail = () => {
   const axiosPrivate = useAxiosPrivate()
   const params = useParams()
-  const [user,setUser]= useState(undefined)
-  const [userBlogs,setUserBlogs] =useState(undefined)
+  const [user, setUser] = useState(undefined)
+  const [userBlogs, setUserBlogs] = useState(undefined)
 
-  useEffect(()=>{
+  useEffect(() => {
     const userId = params.id
     const endPoint = `/api/users/userProfile/${userId}`
     axios.get(endPoint)
-      .then((res)=>{
+      .then((res) => {
         setUser(res.data)
       })
-    const endPoint2 =`/api/blogs/userBlogs/${userId}`
+    const endPoint2 = `/api/blogs/userBlogs/${userId}`
     axiosPrivate.get(endPoint2)
-      .then((res)=>{
+      .then((res) => {
         setUserBlogs(res.data)
       })
-    
-  },[setUser,params,axiosPrivate])
+
+  }, [setUser, params, axiosPrivate])
 
   return (
-    <div className=''>
+    <motion.div className=''>
       {(user === undefined && userBlogs === undefined) && <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>Loading profile...</div>}
       {user && user.error !== undefined && <div className='md:text-3xl text-2xl absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>NO USER WITH THAT ID</div>}
-      {(user && user.error === undefined)&&(userBlogs !== undefined) && 
-        <div className='flex flex-col'>
+      {(user && user.error === undefined) && (userBlogs !== undefined) &&
+        <div className='flex flex-col place-items-center'>
           {/* User Info */}
-          <div className='text-center border-b-2 pb-3 mb-5'>
+          <motion.div initial={{ y: "30vh", scale: 1.6, width: "50%" }} animate={{ y: 0, scale: 1, width: "100%" }} transition={{ delay: 0.5, duration: 2, width: { delay: 0.6, duration: 3 } }} className='text-center border-b-2 pb-3 mb-5'>
             <span className='text-5xl'>{user.username}</span>
-          </div>
+          </motion.div>
 
           {/* User Blogs */}
           {userBlogs.length > 0 &&
-          <div className=' text-center flex flex-row flex-wrap gap-x-10 place-content-center'>
-            {userBlogs.map((blog,index)=>{
-              let path = '/blog/'+ blog.id
-              return(
-                <BlogMiniature location={path} title={blog.title} key={index} text={blog.text}/>
-              )
-            })}
-          </div>}
+            <motion.div className=' text-center flex flex-row flex-wrap gap-x-10 place-content-center'>
+              {userBlogs.map((blog, index) => {
+                let path = '/blog/' + blog.id
+                return (
+                  <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 2 + index / 10 }} >
+                    <BlogMiniature delay={index * 0.1} location={path} title={blog.title} key={index} text={blog.text} />
+                  </motion.div>
+                )
+              })}
+            </motion.div>}
           {userBlogs.length === 0 && <div className='text-3xl h-48 w-scren relative'>
             <span className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center'>No blogs uploaded yet :)</span>
           </div>}
-        </div>      
+        </div>
       }
-    </div>
+    </motion.div>
   );
 }
 

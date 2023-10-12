@@ -30,7 +30,7 @@ export default function BlogsCatalog() {
               let pathProfile = "/user/" + blog.userId
               return (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1 + index / 10 }} >
-                  <BlogMiniature delay={index / 10} location={path} title={blog.title} key={index} text={blog.text} pathProfile={pathProfile} username={blog.username} />
+                  <BlogMiniature location={path} title={blog.title} key={index} text={blog.text} pathProfile={pathProfile} username={blog.username} />
                 </motion.div>
               )
             })}

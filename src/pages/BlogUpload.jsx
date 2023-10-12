@@ -3,7 +3,9 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import UseAuth from '../hooks/useAuth';
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import { motion } from 'framer-motion';
 const UPLOAD_URL = '/api/blogs/'
+
 
 export default function BlogUpload() {
   const axiosPrivate = useAxiosPrivate()
@@ -19,7 +21,7 @@ export default function BlogUpload() {
 
     Swal.fire({ title: 'Uploading blog...', icon: 'question' })
     if (title !== ' ' && text !== ' ') {
-      try { 
+      try {
         setWait(true)
         const response = await axiosPrivate.post(UPLOAD_URL,
           JSON.stringify({ title, text, userId, username }),
@@ -27,7 +29,7 @@ export default function BlogUpload() {
         if (response?.data) {
           setWait(false)
           e.target.title.value = " "
-          e.target.text.value= " "
+          e.target.text.value = " "
           Swal.fire({ title: 'Success', icon: 'success' })
         }
       } catch (err) {
@@ -38,8 +40,8 @@ export default function BlogUpload() {
   }
 
   return (
-    <div className='bg-blue-600 flex flex-col w-full m-auto gap-y-2 text-2xl'>
-      <form className='flex flex-col w-full place-items-center' onSubmit={handleBlogUpload}>
+    <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }} className='bg-blue-600 flex flex-col w-full m-auto gap-y-2 text-2xl'>
+      <motion.form initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4 }} className='flex flex-col w-full place-items-center' onSubmit={handleBlogUpload}>
         <label>Title </label>
         <span className='text-xl text-black'>(max 30 characters)</span>
         <input className='border border-black text-center text-black w-1/3' maxLength='30' required='true' type='text' name='title' />
@@ -47,7 +49,7 @@ export default function BlogUpload() {
         <span className='text-xl text-black'>(max 600 characters)</span>
         <textarea className='border border-black text-center text-black w-1/2' maxLength='600' rows="7" required='true' type='text' name='text' ></textarea>
         <button className={wait ? 'p-2 m-2 bg-slate-300 border border-indigo-400' : 'p-2 m-2 bg-indigo-800 border border-indigo-400'} disabled={wait ? true : false} type='submit'>Upload</button>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>
   )
 }

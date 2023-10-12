@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 
-export default function BlogMiniature({ title, text, location, pathProfile, username, delay }) {
+export default function BlogMiniature({ title, text, location, pathProfile, username }) {
   return (
 
     <div className='group text-center border border-indigo-200 border-opacity-0 hover:border-opacity-100 delay-75 transition-all ease-in-out'>
