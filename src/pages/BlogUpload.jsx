@@ -44,10 +44,10 @@ export default function BlogUpload() {
       <motion.form initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.4 }} className='flex flex-col w-full place-items-center' onSubmit={handleBlogUpload}>
         <label>Title </label>
         <span className='text-xl text-black'>(max 30 characters)</span>
-        <input className='border border-black text-center text-black w-1/3' maxLength='30' required='true' type='text' name='title' />
+        <input className='border border-black text-center text-black md:w-1/3' maxLength='30' required='true' type='text' name='title' />
         <label>Text</label>
         <span className='text-xl text-black'>(max 600 characters)</span>
-        <textarea className='border border-black text-center text-black w-1/2' maxLength='600' rows="7" required='true' type='text' name='text' ></textarea>
+        <textarea className='border border-black text-center text-black md:w-1/2 w-4/5' maxLength='600' rows="7" required='true' type='text' name='text' ></textarea>
         <button className={wait ? 'p-2 m-2 bg-slate-300 border border-indigo-400' : 'p-2 m-2 bg-indigo-800 border border-indigo-400'} disabled={wait ? true : false} type='submit'>Upload</button>
       </motion.form>
     </motion.div>

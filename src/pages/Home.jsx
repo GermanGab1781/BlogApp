@@ -17,7 +17,7 @@ const Home = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delayChildren: 0.4 }} className="flex flex-col place-items-center">
       {/* Title */}
       <h1 className="text-3xl mb-12">What can you do here??</h1>
-      <motion.div className="flex flex-row flex-wrap gap-x-4  place-content-center">
+      <motion.div className="flex flex-row flex-wrap gap-x-4 md:gap-y-0 gap-y-5 place-content-center">
         <ButtonHome delay={0.1} text="Upload Blog" path="/blogUpload" />
         <ButtonHome delay={0.2} text="Users Registered" path="/usersCatalog" />
         <ButtonHome delay={0.3} text="Feed" path="/blogsCatalog" />
